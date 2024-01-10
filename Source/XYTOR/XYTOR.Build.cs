@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class Xytor1 : ModuleRules
+public class XYTOR : ModuleRules
 {
-	public Xytor1(ReadOnlyTargetRules Target) : base(Target)
+	public XYTOR(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 

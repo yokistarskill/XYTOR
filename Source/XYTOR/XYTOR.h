@@ -4,4 +4,4 @@
 
 #include "CoreMinimal.h"
 
-DECLARE_LOG_CATEGORY_EXTERN(LogXytor1, Log, All);
+DECLARE_LOG_CATEGORY_EXTERN(LogXYTOR, Log, All);

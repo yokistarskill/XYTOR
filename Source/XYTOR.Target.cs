@@ -3,13 +3,13 @@
 using UnrealBuildTool;
 using System.Collections.Generic;
 
-public class Xytor1Target : TargetRules
+public class XYTORTarget : TargetRules
 {
-	public Xytor1Target(TargetInfo Target) : base(Target)
+	public XYTORTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_1;
-		ExtraModuleNames.Add("Xytor1");
+		ExtraModuleNames.Add("XYTOR");
 	}
 }

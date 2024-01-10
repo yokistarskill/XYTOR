@@ -4,15 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "Xytor1Character.generated.h"
+#include "XYTORCharacter.generated.h"
 
 UCLASS(Blueprintable)
-class AXytor1Character : public ACharacter
+class AXYTORCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
-	AXytor1Character();
+	AXYTORCharacter();
 
 	// Called every frame.
 	virtual void Tick(float DeltaSeconds) override;

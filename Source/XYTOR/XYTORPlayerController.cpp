@@ -1,16 +1,16 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-#include "Xytor1PlayerController.h"
+#include "XYTORPlayerController.h"
 #include "GameFramework/Pawn.h"
 #include "Blueprint/AIBlueprintHelperLibrary.h"
 #include "NiagaraSystem.h"
 #include "NiagaraFunctionLibrary.h"
-#include "Xytor1Character.h"
+#include "XYTORCharacter.h"
 #include "Engine/World.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 
-AXytor1PlayerController::AXytor1PlayerController()
+AXYTORPlayerController::AXYTORPlayerController()
 {
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Default;
@@ -18,7 +18,7 @@ AXytor1PlayerController::AXytor1PlayerController()
 	FollowTime = 0.f;
 }
 
-void AXytor1PlayerController::BeginPlay()
+void AXYTORPlayerController::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
@@ -30,7 +30,7 @@ void AXytor1PlayerController::BeginPlay()
 	}
 }
 
-void AXytor1PlayerController::SetupInputComponent()
+void AXYTORPlayerController::SetupInputComponent()
 {
 	// set up gameplay key bindings
 	Super::SetupInputComponent();
@@ -39,26 +39,26 @@ void AXytor1PlayerController::SetupInputComponent()
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent))
 	{
 		// Setup mouse input events
-		EnhancedInputComponent->BindAction(SetDestinationClickAction, ETriggerEvent::Started, this, &AXytor1PlayerController::OnInputStarted);
-		EnhancedInputComponent->BindAction(SetDestinationClickAction, ETriggerEvent::Triggered, this, &AXytor1PlayerController::OnSetDestinationTriggered);
-		EnhancedInputComponent->BindAction(SetDestinationClickAction, ETriggerEvent::Completed, this, &AXytor1PlayerController::OnSetDestinationReleased);
-		EnhancedInputComponent->BindAction(SetDestinationClickAction, ETriggerEvent::Canceled, this, &AXytor1PlayerController::OnSetDestinationReleased);
+		EnhancedInputComponent->BindAction(SetDestinationClickAction, ETriggerEvent::Started, this, &AXYTORPlayerController::OnInputStarted);
+		EnhancedInputComponent->BindAction(SetDestinationClickAction, ETriggerEvent::Triggered, this, &AXYTORPlayerController::OnSetDestinationTriggered);
+		EnhancedInputComponent->BindAction(SetDestinationClickAction, ETriggerEvent::Completed, this, &AXYTORPlayerController::OnSetDestinationReleased);
+		EnhancedInputComponent->BindAction(SetDestinationClickAction, ETriggerEvent::Canceled, this, &AXYTORPlayerController::OnSetDestinationReleased);
 
 		// Setup touch input events
-		EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Started, this, &AXytor1PlayerController::OnInputStarted);
-		EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Triggered, this, &AXytor1PlayerController::OnTouchTriggered);
-		EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Completed, this, &AXytor1PlayerController::OnTouchReleased);
-		EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Canceled, this, &AXytor1PlayerController::OnTouchReleased);
+		EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Started, this, &AXYTORPlayerController::OnInputStarted);
+		EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Triggered, this, &AXYTORPlayerController::OnTouchTriggered);
+		EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Completed, this, &AXYTORPlayerController::OnTouchReleased);
+		EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Canceled, this, &AXYTORPlayerController::OnTouchReleased);
 	}
 }
 
-void AXytor1PlayerController::OnInputStarted()
+void AXYTORPlayerController::OnInputStarted()
 {
 	StopMovement();
 }
 
 // Triggered every frame when the input is held down
-void AXytor1PlayerController::OnSetDestinationTriggered()
+void AXYTORPlayerController::OnSetDestinationTriggered()
 {
 	// We flag that the input is being pressed
 	FollowTime += GetWorld()->GetDeltaSeconds();
@@ -90,7 +90,7 @@ void AXytor1PlayerController::OnSetDestinationTriggered()
 	}
 }
 
-void AXytor1PlayerController::OnSetDestinationReleased()
+void AXYTORPlayerController::OnSetDestinationReleased()
 {
 	// If it was a short press
 	if (FollowTime <= ShortPressThreshold)
@@ -104,13 +104,13 @@ void AXytor1PlayerController::OnSetDestinationReleased()
 }
 
 // Triggered every frame when the input is held down
-void AXytor1PlayerController::OnTouchTriggered()
+void AXYTORPlayerController::OnTouchTriggered()
 {
 	bIsTouch = true;
 	OnSetDestinationTriggered();
 }
 
-void AXytor1PlayerController::OnTouchReleased()
+void AXYTORPlayerController::OnTouchReleased()
 {
 	bIsTouch = false;
 	OnSetDestinationReleased();

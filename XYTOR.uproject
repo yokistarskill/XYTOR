@@ -5,7 +5,7 @@
 	"Description": "",
 	"Modules": [
 		{
-			"Name": "Xytor1",
+			"Name": "XYTOR",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		}

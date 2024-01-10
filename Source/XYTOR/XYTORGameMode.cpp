@@ -1,14 +1,14 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-#include "Xytor1GameMode.h"
-#include "Xytor1PlayerController.h"
-#include "Xytor1Character.h"
+#include "XYTORGameMode.h"
+#include "XYTORPlayerController.h"
+#include "XYTORCharacter.h"
 #include "UObject/ConstructorHelpers.h"
 
-AXytor1GameMode::AXytor1GameMode()
+AXYTORGameMode::AXYTORGameMode()
 {
 	// use our custom PlayerController class
-	PlayerControllerClass = AXytor1PlayerController::StaticClass();
+	PlayerControllerClass = AXYTORPlayerController::StaticClass();
 
 	// set default pawn class to our Blueprinted character
 	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/TopDown/Blueprints/BP_TopDownCharacter"));

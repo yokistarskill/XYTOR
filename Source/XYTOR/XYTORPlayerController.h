@@ -6,18 +6,18 @@
 #include "Templates/SubclassOf.h"
 #include "GameFramework/PlayerController.h"
 #include "InputActionValue.h"
-#include "Xytor1PlayerController.generated.h"
+#include "XYTORPlayerController.generated.h"
 
 /** Forward declaration to improve compiling times */
 class UNiagaraSystem;
 
 UCLASS()
-class AXytor1PlayerController : public APlayerController
+class AXYTORPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
 public:
-	AXytor1PlayerController();
+	AXYTORPlayerController();
 
 	/** Time Threshold to know if it was a short press */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
