@@ -1,6 +1,6 @@
 // XYTOR. All Rights Reserved.
 
-#include "HUD/HUD_WidgetManager.h"
+#include "Core/WidgetManager/HUD_WidgetManager.h"
 #include "Blueprint/UserWidget.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogHUD, All, All)

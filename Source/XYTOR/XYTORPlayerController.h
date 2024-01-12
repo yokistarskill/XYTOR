@@ -6,13 +6,14 @@
 #include "Templates/SubclassOf.h"
 #include "GameFramework/PlayerController.h"
 #include "InputActionValue.h"
+#include "Core/Information/PC_Information.h"
 #include "XYTORPlayerController.generated.h"
 
 /** Forward declaration to improve compiling times */
 class UNiagaraSystem;
 
 UCLASS()
-class AXYTORPlayerController : public APlayerController
+class AXYTORPlayerController : public APC_Information
 {
 	GENERATED_BODY()
 
