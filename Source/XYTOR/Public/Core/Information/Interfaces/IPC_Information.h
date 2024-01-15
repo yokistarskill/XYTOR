@@ -19,6 +19,4 @@ class IIPC_Information
 public:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void DisplayInformation() const;
-    UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-    void HideInformation() const;
 };

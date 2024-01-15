@@ -19,10 +19,6 @@ class IIPS_Information
 
 public:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-    void DisplayInformation() const;
-    UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-    void HideInformation() const;
-    UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     TArray<FName> GetEntities() const;
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void AddEntity(FName EntityName);
