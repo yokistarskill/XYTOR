@@ -14,13 +14,14 @@
 UCLASS(Blueprintable)
 class XYTOR_API APC_Information : public APlayerController, public IIPC_Information
 {
-public:
-
 protected:
-    UPROPERTY(BlueprintReadWrite, Category="PC_Information")
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="PC_Information")
     TSubclassOf<UW_InformationBase> WidgetClass;
 public:
 
+    virtual void BeginPlay() override;
+    
     UFUNCTION(BlueprintCallable)
     virtual void DisplayInformation_Implementation() const override;
 

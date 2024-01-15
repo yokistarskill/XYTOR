@@ -8,6 +8,14 @@
 
 class APS_Information;
 
+void APC_Information::BeginPlay()
+{
+    if(!WidgetClass)
+    {
+        UE_LOG(LogTemp, Error, TEXT("No widget class in PC_Information"));
+    }
+}
+
 void APC_Information::DisplayInformation_Implementation() const
 {
     APlayerState* PS = GetPlayerState<APlayerState>();
