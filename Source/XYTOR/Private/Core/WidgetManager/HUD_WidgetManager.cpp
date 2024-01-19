@@ -2,33 +2,37 @@
 
 #include "Core/WidgetManager/HUD_WidgetManager.h"
 #include "Blueprint/UserWidget.h"
+#include "Core/WidgetManager/Widgets/W_BackgroundBase.h"
+#include "Core/WidgetManager/Widgets/W_NormalBase.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogHUD, All, All)
+
+TArray<UW_Base*>& AHUD_WidgetManager::ChooseWidgets(TSubclassOf<UW_Base> WidgetClass)
+{
+    if (UW_Base::IsBackgroundWidgetByClass(WidgetClass))
+        return BackgroundWidgets;
+    return NormalWidgets;
+}
+
+const TArray<UW_Base*>& AHUD_WidgetManager::ChooseWidgets(TSubclassOf<UW_Base> WidgetClass) const
+{
+    if (UW_Base::IsBackgroundWidgetByClass(WidgetClass))
+        return BackgroundWidgets;
+    return NormalWidgets;
+}
 
 void AHUD_WidgetManager::BeginPlay()
 {
     Super::BeginPlay();
-
-    // Create widgets for each widget class stored
-    for (const auto WidgetClass : GameWidgetClasses)
-    {
-        GameWidgets.Add(CreateWidget<UUserWidget>(GetWorld(), WidgetClass));
-    }
-
-    // Add all game widgets to the viewport and set visibility to hidden
-    for (const auto GameWidget : GameWidgets)
-    {
-        if (!GameWidget) continue;
-
-        GameWidget->AddToViewport();
-        GameWidget->SetVisibility(ESlateVisibility::Hidden);
-    }
 }
 
-UUserWidget* AHUD_WidgetManager::GetWidgetByClass(TSubclassOf<UUserWidget> WidgetClass) const
+UW_Base* AHUD_WidgetManager::GetWidgetByClass(TSubclassOf<UW_Base> WidgetClass) const
 {
-    // Iterate through the array of game widgets
-    for (const auto GameWidget : GameWidgets)
+    // Choosing array of background or normal widgets.
+    const TArray<UW_Base*>& Widgets = ChooseWidgets(WidgetClass);
+    
+    // Iterate through the array of widgets
+    for (const auto GameWidget : Widgets)
     {
         // Check if the current game widget is of the specified class
         if (GameWidget->IsA(WidgetClass))
@@ -42,17 +46,29 @@ UUserWidget* AHUD_WidgetManager::GetWidgetByClass(TSubclassOf<UUserWidget> Widge
     return nullptr;
 }
 
-void AHUD_WidgetManager::ShowWidgetByClass(const TSubclassOf<UUserWidget> WidgetClass)
+void AHUD_WidgetManager::ToggleNormalWidgetByClass(const TSubclassOf<UW_Base> WidgetClass)
 {
+    if (UW_Base::IsBackgroundWidgetByClass(WidgetClass))
+    {
+        UE_LOG(LogTemp, Error, TEXT("It is impossible to toggle a background widget"));
+        return;
+    }
+
     // Hide the current widget if it exists
     if (CurrentWidget)
     {
         CurrentWidget->SetVisibility(ESlateVisibility::Hidden);
+        
+        // If the target widget was the current one, the job is finished
+        if (CurrentWidget->IsA(WidgetClass))
+        {
+            CurrentWidget = nullptr;
+            return;
+        }
     }
-
+    
     // Get the new widget by class
     CurrentWidget = GetWidgetByClass(WidgetClass);
-
     if (CurrentWidget)
     {
         // Show the new widget
@@ -63,5 +79,40 @@ void AHUD_WidgetManager::ShowWidgetByClass(const TSubclassOf<UUserWidget> Widget
     {
         // Log an error if the specified widget class is not found
         UE_LOG(LogHUD, Error, TEXT("Widget class not found: %s"), *WidgetClass->GetName());
+    }
+}
+
+UW_Base* AHUD_WidgetManager::AddWidgetByClass(TSubclassOf<UW_Base> WidgetClass)
+{
+    
+    if (GetWidgetByClass(WidgetClass))
+    {
+        UE_LOG(LogHUD, Warning, TEXT("Widget class is already in the HUD: %s"), *WidgetClass->GetName());
+    }
+    
+    // Choose array of widgets
+    TArray<UW_Base*>& GameWidgets = ChooseWidgets(WidgetClass);
+
+    // If it is possible, create and add widget to array and Viewport
+    if (UW_Base* NewWidget = CreateWidget<UW_Base>(GetWorld(), WidgetClass))
+    {
+        GameWidgets.Add(NewWidget);
+        NewWidget->AddToViewport();
+        NewWidget->SetVisibility(ESlateVisibility::Hidden);
+
+        return NewWidget;
+    }
+
+    UE_LOG(LogHUD, Error, TEXT("Fail to create widget from class: %s"), *WidgetClass->GetName());
+    return nullptr;
+}
+
+void AHUD_WidgetManager::HideCurrentNormalWidget()
+{
+    // Hide the current widget if it exists
+    if (CurrentWidget)
+    {
+        CurrentWidget->SetVisibility(ESlateVisibility::Hidden);
+        CurrentWidget = nullptr;
     }
 }

@@ -4,13 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Core/WidgetManager/Widgets/W_NormalBase.h"
 #include "W_InformationBase.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class XYTOR_API UW_InformationBase : public UUserWidget
+class XYTOR_API UW_InformationBase : public UW_NormalBase
 {
 	GENERATED_BODY()
 protected:

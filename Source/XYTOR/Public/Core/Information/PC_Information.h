@@ -16,8 +16,10 @@ class XYTOR_API APC_Information : public APlayerController, public IIPC_Informat
 {
 protected:
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="PC_Information")
-    TSubclassOf<UW_InformationBase> WidgetClass;
+    UPROPERTY(EditDefaultsOnly, Category="Widgets")
+    TSubclassOf<UW_InformationBase> InformationWidgetClass;
+    
+   // UW_InformationBase* InformationWidget = nullptr;
 public:
 
     virtual void BeginPlay() override;
