@@ -8,7 +8,7 @@
 
 void APS_Information::BeginPlay()
 {
-    FString DataTableAsset = "/Script/Engine.DataTable'/Game/XYTOR/Tables/Information/DT_EntitiesInformation.DT_EntitiesInformation'";
+    FString DataTableAsset = "/Script/Engine.DataTable'/Game/XYTOR/DataTables/Information/DT_EntityInformation.DT_EntityInformation'";
 
     // Load the DataTable asset
     UDataTable* Table = LoadObject<UDataTable>(nullptr, *DataTableAsset);

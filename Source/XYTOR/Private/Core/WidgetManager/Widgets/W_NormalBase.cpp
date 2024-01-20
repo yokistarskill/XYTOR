@@ -6,4 +6,5 @@
 UW_NormalBase::UW_NormalBase()
 {
     bIsBackground = false;
+    
 }

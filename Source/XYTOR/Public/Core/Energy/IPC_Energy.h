@@ -19,5 +19,5 @@ class IIPC_Energy
 
 public:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-    void ProcessDamage();    
+    void ProcessDamage(float Damage);    
 };

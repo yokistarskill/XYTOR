@@ -1,19 +1,22 @@
 // XYTOR. All Rights Reserved.
 
 
-#include "Core/Energy/W_Energy.h"
+#include "..\..\..\Public\Core\Energy\W_EnergyBase.h"
 
-float UW_Energy::GetRatio() const
+float UW_EnergyBase::GetRatio() const
 {
     return CurrentHealth/MaximumHealth;
 }
 
-void UW_Energy::AddDamage(float Value)
+void UW_EnergyBase::AddDamage(float Damage)
 {
-    CurrentHealth = FMath::Clamp(CurrentHealth-Value, 0, MaximumHealth);
+    UE_LOG(LogTemp, Warning, TEXT("Damage added to widget %.3f"), Damage);
+    CurrentHealth = FMath::Clamp(CurrentHealth-Damage, 0, MaximumHealth);
+    UpdateHealthBar();
 }
 
-void UW_Energy::SetMaximum(float Value)
+void UW_EnergyBase::SetMaximum(float MaxHP)
 {
-    MaximumHealth = Value;
+    UE_LOG(LogTemp, Warning, TEXT("New maximum %.3f"), MaxHP);
+    CurrentHealth = MaximumHealth = MaxHP;
 }

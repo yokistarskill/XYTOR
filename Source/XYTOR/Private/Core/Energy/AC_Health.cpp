@@ -11,6 +11,7 @@ UAC_Health::UAC_Health()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	// ...
+    CurrentHealth = MaximumHealth;
 }
 
 
@@ -42,5 +43,10 @@ bool UAC_Health::TakeDamage(float Value)
 bool UAC_Health::IsDead() const
 {
     return CurrentHealth<=0;
+}
+
+float UAC_Health::SetMaximum(float NewMax)
+{
+    return MaximumHealth = CurrentHealth = NewMax;
 }
 

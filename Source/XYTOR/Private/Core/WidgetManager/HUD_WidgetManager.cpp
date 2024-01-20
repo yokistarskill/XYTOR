@@ -73,6 +73,8 @@ void AHUD_WidgetManager::ToggleNormalWidgetByClass(const TSubclassOf<UW_Base> Wi
     {
         // Show the new widget
         CurrentWidget->SetVisibility(ESlateVisibility::Visible);
+
+        //CurrentWidget->SetFocus();
         UE_LOG(LogHUD, Display, TEXT("Show widget by class: %s"), *WidgetClass->GetName());
     }
     else
@@ -90,16 +92,20 @@ UW_Base* AHUD_WidgetManager::AddWidgetByClass(TSubclassOf<UW_Base> WidgetClass)
         UE_LOG(LogHUD, Warning, TEXT("Widget class is already in the HUD: %s"), *WidgetClass->GetName());
     }
     
-    // Choose array of widgets
-    TArray<UW_Base*>& GameWidgets = ChooseWidgets(WidgetClass);
-
     // If it is possible, create and add widget to array and Viewport
     if (UW_Base* NewWidget = CreateWidget<UW_Base>(GetWorld(), WidgetClass))
     {
-        GameWidgets.Add(NewWidget);
-        NewWidget->AddToViewport();
-        NewWidget->SetVisibility(ESlateVisibility::Hidden);
-
+        if (UW_Base::IsBackgroundWidgetByClass(WidgetClass))
+        {
+            BackgroundWidgets.Add(NewWidget);
+            NewWidget->AddToViewport(0);
+            NewWidget->SetVisibility(ESlateVisibility::Visible);
+        }
+        else{
+            NormalWidgets.Add(NewWidget);
+            NewWidget->AddToViewport(10);
+            NewWidget->SetVisibility(ESlateVisibility::Hidden);
+        }
         return NewWidget;
     }
 

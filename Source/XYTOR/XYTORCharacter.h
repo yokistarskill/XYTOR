@@ -3,11 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Core/Energy/C_Energy.h"
 #include "GameFramework/Character.h"
 #include "XYTORCharacter.generated.h"
 
 UCLASS(Blueprintable)
-class AXYTORCharacter : public ACharacter
+class AXYTORCharacter : public AC_Energy
 {
 	GENERATED_BODY()
 

@@ -6,6 +6,7 @@
 #include "Templates/SubclassOf.h"
 #include "GameFramework/PlayerController.h"
 #include "InputActionValue.h"
+#include "Core/Energy/PC_Energy.h"
 #include "Core/Information/PC_Information.h"
 #include "XYTORPlayerController.generated.h"
 
@@ -13,7 +14,7 @@
 class UNiagaraSystem;
 
 UCLASS()
-class AXYTORPlayerController : public APC_Information
+class AXYTORPlayerController : public APC_Energy
 {
 	GENERATED_BODY()
 
