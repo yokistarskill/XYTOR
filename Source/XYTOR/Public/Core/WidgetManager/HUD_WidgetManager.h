@@ -19,15 +19,15 @@ class XYTOR_API AHUD_WidgetManager : public AHUD
 
 private:
     /** Array storing instantiated background UserWidgets */
-    UPROPERTY()
+    UPROPERTY(VisibleAnywhere)
     TArray<UW_Base*> BackgroundWidgets;
 
     /** Array storing instantiated normal UserWidgets */
-    UPROPERTY()
+    UPROPERTY(VisibleAnywhere)
     TArray<UW_Base*> NormalWidgets;
     
     /** Currently visible normal widget */
-    UPROPERTY()
+    UPROPERTY(VisibleAnywhere)
     UW_Base* CurrentWidget = nullptr;
 
     /**
