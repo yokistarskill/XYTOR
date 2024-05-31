@@ -40,7 +40,7 @@ void APC_Interaction::Interact()
         // Check for null actor
         const auto* CurrentComponent = ComponentsToInteract[CurrentObjectIndex];
         if (!CurrentComponent)
-        {
+        { 
             // RemoveActor(CurrentComponent->GetOwner());
             return;
         }
