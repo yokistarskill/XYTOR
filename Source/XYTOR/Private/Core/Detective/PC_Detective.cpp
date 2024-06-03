@@ -2,15 +2,12 @@
 
 
 #include "Core/Detective/PC_Detective.h"
-
-#include "UnrealWidgetFwd.h"
 #include "Core/Detective/AC_ExploringHandler.h"
 #include "Core/WidgetManager/HUD_WidgetManager.h"
 
 void APC_Detective::BeginPlay()
 {
     Super::BeginPlay();
-
     INIT_WIDGET_IN_BEGIN_PLAY(APC_Detective, UW_TipsBase, TipsWidgetClass, TipsWidget);
 }
 
@@ -28,6 +25,7 @@ void APC_Detective::UnDetectAll() const
 
 void APC_Detective::DisplayTip(const FText& Tip) const
 {
+    // UE_LOG(LogTemp, Warning, TEXT("Tip  display"));
     TipsWidget->DisplayTip(Tip);
 }
 

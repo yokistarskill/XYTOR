@@ -22,7 +22,7 @@ private:
     GENERATED_BODY()
 
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, Category="Widgets")
     TSubclassOf<UW_TipsBase> TipsWidgetClass;
     UPROPERTY()
     UW_TipsBase* TipsWidget;
