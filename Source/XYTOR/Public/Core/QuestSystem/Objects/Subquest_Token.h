@@ -13,6 +13,14 @@
 UCLASS()
 class XYTOR_API USubquest_Token : public USubquest
 {
-	GENERATED_BODY()
-	
+    GENERATED_BODY()
+
+    TArray<FName> RequiredTokens;
+    
+protected:
+    virtual bool InitByName(FName SubquestName) override;
+    virtual bool Update(const APS_Quests* PlayerState) override;
+
+    
+
 };

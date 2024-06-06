@@ -10,7 +10,7 @@ AC_Energy::AC_Energy()
 {
 
     HealthComponent = CreateDefaultSubobject<UAC_Health>(FName("AC_Health"));
-    if(!HealthComponent)
+    if (!HealthComponent)
     {
         UE_LOG(LogTemp, Error, TEXT("Incorrect health component"));
     }
@@ -19,8 +19,8 @@ AC_Energy::AC_Energy()
 // Called when the game starts or when spawned
 void AC_Energy::BeginPlay()
 {
-	Super::BeginPlay();
-	
+    Super::BeginPlay();
+
 }
 
 void AC_Energy::MakeDead()
@@ -30,14 +30,14 @@ void AC_Energy::MakeDead()
 // Called every frame
 void AC_Energy::Tick(float DeltaTime)
 {
-	Super::Tick(DeltaTime);
+    Super::Tick(DeltaTime);
 
 }
 
 // Called to bind functionality to input
 void AC_Energy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
+    Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 }
 
@@ -56,14 +56,17 @@ float AC_Energy::TakeDamage(float Damage, const FDamageEvent& DamageEvent, ACont
     Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
 
     if (FMath::IsNearlyZero(Damage))
+    {
         return 0;
+    }
 
     UE_LOG(LogTemp, Warning, TEXT("Damage taken %.3f"), Damage);
     OnDamageTaken.Broadcast(Damage);
-    
+
     if (HealthComponent->TakeDamage(Damage))
+    {
         MakeDead();
-        
+    }
+
     return Damage;
 }
-

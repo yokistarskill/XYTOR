@@ -9,17 +9,8 @@
 void APC_Energy::BeginPlay()
 {
     Super::BeginPlay();
-    if(!EnergyWidgetClass)
-    {
-        UE_LOG(LogTemp, Error, TEXT("No widget class in PC_Energy"));
-    }
 
-    AHUD_WidgetManager* HUD = Cast<AHUD_WidgetManager>(GetHUD());
-    EnergyWidget = Cast<UW_EnergyBase>(HUD->AddWidgetByClass(EnergyWidgetClass));
-    if (!EnergyWidget)
-    {
-        UE_LOG(LogTemp, Error, TEXT("EnergyWidgetClass was not created: %s"), *EnergyWidgetClass->GetName());
-    }
+    INIT_WIDGET_IN_BEGIN_PLAY(APC_Energy, UW_EnergyBase, EnergyWidgetClass, EnergyWidget);
     
     if (AC_Energy* Char = Cast<AC_Energy>(GetCharacter()))
     {
