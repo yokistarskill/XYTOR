@@ -3,13 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
+#include "Core/Player/C_Base.h"
 #include "C_Energy.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDamageTaken, float, Damage);
 
 UCLASS()
-class XYTOR_API AC_Energy : public ACharacter
+class XYTOR_API AC_Energy : public AC_Base
 {
     GENERATED_BODY()
 

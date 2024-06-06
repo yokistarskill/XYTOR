@@ -32,7 +32,7 @@ UW_Base* AHUD_WidgetManager::GetWidgetByClass(TSubclassOf<UW_Base> WidgetClass) 
     const TArray<UW_Base*>& Widgets = ChooseWidgets(WidgetClass);
     
     // Iterate through the array of widgets
-    for (const auto GameWidget : Widgets)
+    for (const auto& GameWidget : Widgets)
     {
         // Check if the current game widget is of the specified class
         if (GameWidget->IsA(WidgetClass))
@@ -87,9 +87,10 @@ void AHUD_WidgetManager::ToggleNormalWidgetByClass(const TSubclassOf<UW_Base> Wi
 UW_Base* AHUD_WidgetManager::AddWidgetByClass(TSubclassOf<UW_Base> WidgetClass)
 {
     
-    if (GetWidgetByClass(WidgetClass))
+    if (const auto& GameWidget = GetWidgetByClass(WidgetClass))
     {
         UE_LOG(LogHUD, Warning, TEXT("Widget class is already in the HUD: %s"), *WidgetClass->GetName());
+        return GameWidget;
     }
     
     // If it is possible, create and add widget to array and Viewport

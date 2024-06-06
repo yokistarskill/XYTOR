@@ -3,8 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "PS_Tokens.h"
 #include "W_InformationBase.h"
-#include "GameFramework/PlayerState.h"
 #include "Interfaces/IPS_Information.h"
 #include "PS_Information.generated.h"
 
@@ -12,7 +12,7 @@
  * 
  */
 UCLASS()
-class XYTOR_API APS_Information : public APlayerState, public IIPS_Information
+class XYTOR_API APS_Information : public APS_Tokens, public IIPS_Information
 {
 protected:
 

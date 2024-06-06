@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "E_SubquestType.h"
+#include "PS_Dialogues.h"
 #include "./Objects/Quest.h"
-#include "GameFramework/PlayerState.h"
 #include "PS_Quests.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnQuestChanged, UQuest*, QuestObject);
@@ -14,12 +14,15 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnQuestChanged, UQuest*, QuestObjec
  * 
  */
 UCLASS()
-class XYTOR_API APS_Quests : public APlayerState
+class XYTOR_API APS_Quests : public APS_Dialogues
 {
-	GENERATED_BODY()
-    UPROPERTY()
+    GENERATED_BODY()
+
+protected:
+    UPROPERTY(VisibleAnywhere, Category = "Quest System")
     TArray<UQuest*> AvailableQuests;
-    UPROPERTY()
+    
+    UPROPERTY(VisibleAnywhere, Category = "Quest System")
     TArray<UQuest*> CompletedQuests;
 
     void FinishQuest(uint8 Index);
@@ -28,8 +31,13 @@ public:
     FOnQuestChanged OnQuestChanged;
     
     void UpdateQuests(EE_SubquestType Type);
+    UFUNCTION(BlueprintCallable)
     void AddQuest(FName QuestName);
-    
+
     void TokensChanged();
-    void ItemsChanged();
+    UFUNCTION()
+    void ItemsChanged(UItem* Item, int32 Count);
+
+    virtual void BeginPlay() override;
+
 };
