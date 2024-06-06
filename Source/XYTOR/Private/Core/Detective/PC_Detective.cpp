@@ -2,8 +2,20 @@
 
 
 #include "Core/Detective/PC_Detective.h"
+
+#include "EnhancedInputComponent.h"
 #include "Core/Detective/AC_ExploringHandler.h"
 #include "Core/WidgetManager/HUD_WidgetManager.h"
+
+void APC_Detective::SetupInputComponent()
+{
+    Super::SetupInputComponent();
+
+    if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent))
+    {
+        EnhancedInputComponent->BindAction(DetectiveAction, ETriggerEvent::Started, this, &APC_Detective::DetectiveActionHandler);
+    }
+}
 
 void APC_Detective::BeginPlay()
 {
@@ -67,4 +79,9 @@ bool APC_Detective::UnDetectEvidence(AActor* Actor)
     EvidenceComponent->UnDetect();
     return 0<DetectiveComponents.RemoveSingleSwap(EvidenceComponent);
     
+}
+
+void APC_Detective::DetectiveActionHandler()
+{
+    ToggleShouldDetect();
 }

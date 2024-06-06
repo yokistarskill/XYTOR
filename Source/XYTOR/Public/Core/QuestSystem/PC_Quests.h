@@ -22,8 +22,15 @@ protected:
     UPROPERTY(EditDefaultsOnly, Category="Widgets")
     TSubclassOf<UW_QuestListBase> QuestListWidgetClass;
 public:
+    virtual void SetupInputComponent() override;
+    
     virtual void BeginPlay() override;
     UFUNCTION(BlueprintCallable)
     void DisplayQuests() const;
-	
+
+private:
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+    UInputAction* QuestsAction;
+
+    void QuestsActionHandler();
 };

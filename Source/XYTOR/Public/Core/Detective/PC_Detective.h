@@ -15,13 +15,11 @@ class UW_EvidenceBase;
 UCLASS()
 class XYTOR_API APC_Detective : public APC_Interaction
 {
+   GENERATED_BODY()
+
 protected:
     virtual void BeginPlay() override;
 
-private:
-    GENERATED_BODY()
-
-protected:
     UPROPERTY(EditAnywhere, Category="Widgets")
     TSubclassOf<UW_TipsBase> TipsWidgetClass;
     UPROPERTY()
@@ -37,6 +35,8 @@ protected:
     void DetectAll() const;
     void UnDetectAll() const;
 public:
+    virtual void SetupInputComponent() override;
+    
     void DisplayTip(const FText& Tip) const;
     
     UFUNCTION(BlueprintCallable)
@@ -48,4 +48,9 @@ public:
     UFUNCTION(BlueprintCallable)
     bool UnDetectEvidence(AActor* Actor);
 
+private:
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+    UInputAction* DetectiveAction;
+
+    void DetectiveActionHandler();
 };

@@ -36,6 +36,7 @@ protected:
     void Interact();
     
 public:
+    virtual void SetupInputComponent() override;
     virtual void Tick(float DeltaSeconds) override;
     UFUNCTION(BlueprintCallable, Category="Interacting System")
     bool AddActor(AActor* NewActor);
@@ -44,4 +45,8 @@ public:
 
     static bool CanInteract(const AActor* TargetActor);
     static FText GetInteractText(const AActor* TargetActor);
+
+private:
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+    UInputAction* InteractAction;
 };

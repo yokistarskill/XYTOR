@@ -2,6 +2,8 @@
 
 
 #include "Core/Information/PC_Information.h"
+
+#include "EnhancedInputComponent.h"
 #include "Core/Information/Interfaces/IPS_Information.h"
 #include "Core/WidgetManager/HUD_WidgetManager.h"
 #include "GameFramework/PlayerState.h"
@@ -41,4 +43,18 @@ void APC_Information::DisplayInformation_Implementation() const
 
         HUD->ToggleNormalWidgetByClass(InformationWidgetClass);
     }
+}
+
+void APC_Information::SetupInputComponent()
+{
+    Super::SetupInputComponent();
+    if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent))
+    {
+        EnhancedInputComponent->BindAction(InformationAction, ETriggerEvent::Started, this, &APC_Information::InformationActionHandler);
+    }
+}
+
+void APC_Information::InformationActionHandler()
+{
+    DisplayInformation_Implementation();
 }

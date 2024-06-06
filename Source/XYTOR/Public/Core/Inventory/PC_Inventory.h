@@ -29,4 +29,12 @@ public:
     void PickUpItem(FName ItemName, int32 Count) const;
     UFUNCTION(BlueprintCallable)
     void DisplayInventory() const;
+    
+    virtual void SetupInputComponent() override;
+
+private:
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta = (AllowPrivateAccess = "true"))
+    UInputAction* InventoryAction;
+
+    void InventoryActionHandler();
 };
