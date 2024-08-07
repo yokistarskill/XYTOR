@@ -23,10 +23,13 @@ protected:
     /** Move Input Action */
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
     class UInputAction* MoveAction;
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+    UInputAction* CameraZoomAction;
 
     virtual void BeginPlay() override;
 
     virtual void SetupInputComponent() override;
 
     void Move(const FInputActionValue& Value);
+    void ZoomCamera(const FInputActionValue& Value);
 };
