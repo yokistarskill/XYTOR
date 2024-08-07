@@ -5,6 +5,7 @@
 #include "GameFramework/Pawn.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Components/CapsuleComponent.h"
 #include "Core/Player/C_Player.h"
 #include "GameFramework/SpringArmComponent.h"
 
@@ -52,7 +53,7 @@ void APC_Base::Move(const FInputActionValue& Value)
 
     // get right vector 
     const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-
+    
     // add movement 
     GetPawn()->AddMovementInput(ForwardDirection, MovementVector.Y);
     GetPawn()->AddMovementInput(RightDirection, MovementVector.X);
