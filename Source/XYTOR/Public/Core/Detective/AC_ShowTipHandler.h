@@ -9,9 +9,14 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class XYTOR_API UAC_ShowTipHandler : public UAC_InteractionHandler
 {
-	GENERATED_BODY()
-	
+    GENERATED_BODY()
+protected:
+    UPROPERTY(EditAnywhere)
+    FText TipText;
+public:
+    virtual void Interact(AActor* InteractingActor) override;
+
 };

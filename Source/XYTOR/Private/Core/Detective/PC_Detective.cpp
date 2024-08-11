@@ -2,7 +2,26 @@
 
 
 #include "Core/Detective/PC_Detective.h"
+
+#include "EnhancedInputComponent.h"
 #include "Core/Detective/AC_ExploringHandler.h"
+#include "Core/WidgetManager/HUD_WidgetManager.h"
+
+void APC_Detective::SetupInputComponent()
+{
+    Super::SetupInputComponent();
+
+    if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent))
+    {
+        EnhancedInputComponent->BindAction(DetectiveAction, ETriggerEvent::Started, this, &APC_Detective::DetectiveActionHandler);
+    }
+}
+
+void APC_Detective::BeginPlay()
+{
+    Super::BeginPlay();
+    INIT_WIDGET_IN_BEGIN_PLAY(APC_Detective, UW_TipsBase, TipsWidgetClass, TipsWidget);
+}
 
 void APC_Detective::DetectAll() const
 {
@@ -14,6 +33,12 @@ void APC_Detective::UnDetectAll() const
 {
     for (const UAC_ExploringHandler* el: DetectiveComponents)
         el->UnDetect();
+}
+
+void APC_Detective::DisplayTip(const FText& Tip) const
+{
+    // UE_LOG(LogTemp, Warning, TEXT("Tip  display"));
+    TipsWidget->DisplayTip(Tip);
 }
 
 bool APC_Detective::SetShouldDetect(bool Value)
@@ -54,4 +79,9 @@ bool APC_Detective::UnDetectEvidence(AActor* Actor)
     EvidenceComponent->UnDetect();
     return 0<DetectiveComponents.RemoveSingleSwap(EvidenceComponent);
     
+}
+
+void APC_Detective::DetectiveActionHandler()
+{
+    ToggleShouldDetect();
 }

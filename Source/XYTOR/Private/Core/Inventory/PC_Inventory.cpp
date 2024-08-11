@@ -3,6 +3,7 @@
 
 #include "Core/Inventory/PC_Inventory.h"
 
+#include "EnhancedInputComponent.h"
 #include "Core/Inventory/PS_Inventory.h"
 #include "Core/WidgetManager/HUD_WidgetManager.h"
 #include "GameFramework/Character.h"
@@ -51,4 +52,18 @@ void APC_Inventory::DisplayInventory() const
     {
         HUD->ToggleNormalWidgetByClass(InventoryWidgetClass);
     }
+}
+
+void APC_Inventory::SetupInputComponent()
+{
+    Super::SetupInputComponent();
+    if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent))
+    {
+        EnhancedInputComponent->BindAction(InventoryAction, ETriggerEvent::Started, this, &APC_Inventory::InventoryActionHandler);
+    }
+}
+
+void APC_Inventory::InventoryActionHandler()
+{
+    DisplayInventory();
 }

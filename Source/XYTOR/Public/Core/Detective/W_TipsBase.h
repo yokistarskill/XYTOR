@@ -13,5 +13,9 @@ UCLASS()
 class XYTOR_API UW_TipsBase : public UW_BackgroundBase
 {
 	GENERATED_BODY()
-	
+
+public:
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+    void DisplayTip(const FText& Tip) const;
+    
 };

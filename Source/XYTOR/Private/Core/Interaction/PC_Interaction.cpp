@@ -2,6 +2,8 @@
 
 
 #include "Core/Interaction/PC_Interaction.h"
+
+#include "EnhancedInputComponent.h"
 #include "Core/Interaction/AC_InteractionHandler.h"
 #include "Core/WidgetManager/HUD_WidgetManager.h"
 #include "Core/Interaction/AC_Interact.h"
@@ -40,7 +42,7 @@ void APC_Interaction::Interact()
         // Check for null actor
         const auto* CurrentComponent = ComponentsToInteract[CurrentObjectIndex];
         if (!CurrentComponent)
-        {
+        { 
             // RemoveActor(CurrentComponent->GetOwner());
             return;
         }
@@ -60,6 +62,15 @@ void APC_Interaction::Interact()
             return;
         // Get specific handlers setup from BP
         InteractOverHandlers(CurrentComponent->GetHandlers());
+    }
+}
+
+void APC_Interaction::SetupInputComponent()
+{
+    Super::SetupInputComponent();
+    if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent))
+    {
+        EnhancedInputComponent->BindAction(InteractAction, ETriggerEvent::Started, this, &APC_Interaction::Interact);
     }
 }
 

@@ -27,7 +27,17 @@ private:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
     USpringArmComponent* CameraBoom;
 
+protected:
+    UPROPERTY(EditAnywhere, Category = Camera)
+    float MinCameraDistance;
+    
+    UPROPERTY(EditAnywhere, Category = Camera)
+    float MaxCameraDistance;
+
 public:
+    [[nodiscard]] float GetMinCameraDistance() const;
+    [[nodiscard]] float GetMaxCameraDistance() const;
+    
     // Called every frame.
     virtual void Tick(float DeltaSeconds) override;
 

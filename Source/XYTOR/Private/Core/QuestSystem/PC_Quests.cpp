@@ -2,10 +2,22 @@
 
 
 #include "Core/QuestSystem/PC_Quests.h"
+
+#include "EnhancedInputComponent.h"
 #include "Core/QuestSystem/PS_Quests.h"
 
 
 class AHUD_WidgetManager;
+
+void APC_Quests::SetupInputComponent()
+{
+    Super::SetupInputComponent();
+
+    if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent))
+    {
+        EnhancedInputComponent->BindAction(QuestsAction, ETriggerEvent::Started, this, &APC_Quests::QuestsActionHandler);
+    }
+}
 
 void APC_Quests::BeginPlay()
 {
@@ -25,4 +37,9 @@ void APC_Quests::DisplayQuests() const
     {
         HUD->ToggleNormalWidgetByClass(QuestListWidgetClass);
     }
+}
+
+void APC_Quests::QuestsActionHandler()
+{
+    DisplayQuests();
 }

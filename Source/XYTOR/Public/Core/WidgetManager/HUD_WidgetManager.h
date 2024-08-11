@@ -89,10 +89,13 @@ public:
     { \
         UE_LOG(LogTemp, Error, TEXT("No widget class in "#ClassName)); \
     } \
-    AHUD_WidgetManager* HUD = Cast<AHUD_WidgetManager>(GetHUD()); \
-    WidgetContainer = Cast<WidgetClassToCastTo>(HUD->AddWidgetByClass(WidgetClassName)); \
-    if (!WidgetContainer) \
+    else \
     { \
-        UE_LOG(LogTemp, Error, TEXT(#WidgetContainer" was not created: %s"), *(WidgetClassName)->GetName()); \
-    } \
+        AHUD_WidgetManager* HUD = Cast<AHUD_WidgetManager>(GetHUD()); \
+        WidgetContainer = Cast<WidgetClassToCastTo>(HUD->AddWidgetByClass(WidgetClassName)); \
+        if (!WidgetContainer) \
+        { \
+            UE_LOG(LogTemp, Error, TEXT(#WidgetContainer" was not created: %s"), *(WidgetClassName)->GetName()); \
+        } \
+    }\
 };

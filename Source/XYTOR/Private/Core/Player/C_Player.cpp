@@ -30,6 +30,16 @@ AC_Player::AC_Player()
     TopDownCameraComponent->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 }
 
+float AC_Player::GetMinCameraDistance() const
+{
+    return MinCameraDistance;
+}
+
+float AC_Player::GetMaxCameraDistance() const
+{
+    return MaxCameraDistance;
+}
+
 // Called every frame
 void AC_Player::Tick(float DeltaTime)
 {
