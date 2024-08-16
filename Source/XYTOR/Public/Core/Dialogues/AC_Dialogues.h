@@ -7,6 +7,8 @@
 #include "DialogueGraph/DialogueGraph.h"
 #include "AC_Dialogues.generated.h"
 
+class APS_Quests;
+class UAC_Inventory;
 class APS_Tokens;
 class UNPCDialogueGraphNode;
 class UPlayerDialogueGraphNode;
@@ -45,7 +47,12 @@ protected:
     TArray<UPlayerDialogueGraphNode*> CurrentPlayerDialogueNodes;
 
     bool InitializeTokens();
+    bool InitializeQuests();
+    bool InitializeInventory();
 
+    bool Initialization();
+
+    bool ValidatePlayerNode(const UPlayerDialogueGraphNode* Node) const;
 public:
     UFUNCTION(BlueprintCallable)
     void BeginDialogue(UDialogueGraph* Dialogue);
@@ -58,4 +65,8 @@ public:
 private:
     UPROPERTY()
     APS_Tokens* Tokens;
+    UPROPERTY()
+    UAC_Inventory* Inventory;
+    UPROPERTY()
+    APS_Quests* Quests;
 };
