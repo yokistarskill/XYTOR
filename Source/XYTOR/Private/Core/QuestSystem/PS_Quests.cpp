@@ -24,6 +24,7 @@ void APS_Quests::UpdateQuests(EE_SubquestType Type)
 
 void APS_Quests::AddQuest(FName QuestName)
 {
+    if (QuestName.IsNone()) return;
     for (const UQuest* Quest : AvailableQuests)
         if (Quest->GetNameInTable() == QuestName)
             return;
@@ -34,6 +35,8 @@ void APS_Quests::AddQuest(FName QuestName)
     if (UQuest* Quest = NewObject<UQuest>(UQuest::StaticClass()))
     {
         Quest->Init(QuestName);
+        if (Quest->GetSubquests().IsEmpty())
+            return;
         AvailableQuests.Push(Quest);
         OnQuestChanged.Broadcast(Quest);
     }

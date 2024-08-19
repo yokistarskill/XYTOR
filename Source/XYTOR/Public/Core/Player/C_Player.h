@@ -29,10 +29,10 @@ private:
 
 protected:
     UPROPERTY(EditAnywhere, Category = Camera)
-    float MinCameraDistance;
+    float MinCameraDistance = 900.f;
     
     UPROPERTY(EditAnywhere, Category = Camera)
-    float MaxCameraDistance;
+    float MaxCameraDistance = 4500.f;
 
 public:
     [[nodiscard]] float GetMinCameraDistance() const;

@@ -96,6 +96,13 @@ public:
     UFUNCTION(BlueprintCallable)
     uint8 AddItem(FName ItemName, uint8 Count);
     /**
+     * Adds different items in the storage.
+     * @param items    Map of items' names and their quantities.
+     * @return quantity of successfully added items.
+     */
+    UFUNCTION(BlueprintCallable)
+    void AddItems(const TMap<FName, int32>& items);
+    /**
      * Adds items in the storage by pointer to item.
      * This method just use the ItemName from the item.
      * @param Item    Pointer to item to add.
@@ -130,6 +137,8 @@ public:
      */
     UFUNCTION(BlueprintPure)
     bool Contains(FName ItemName, uint8 Count) const;
+    
+    bool Contains(const TMap<FName, int32>& items) const;
     /**
      * @param ItemName    Name of item to count.
      * @return quantity of such items in the storage.

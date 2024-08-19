@@ -133,6 +133,12 @@ uint8 UAC_Inventory::AddItem(FName ItemName, uint8 Count)
     return Count;
 }
 
+void UAC_Inventory::AddItems(const TMap<FName, int32>& items)
+{
+    for (const auto& Pair: items)
+        AddItem(Pair.Key, Pair.Value);
+}
+
 uint8 UAC_Inventory::RemoveItem(FName ItemName, uint8 Count)
 {
     uint32 Index; 
@@ -158,6 +164,14 @@ bool UAC_Inventory::Contains(FName ItemName, uint8 Count) const
     
     const FCounterItem* Counter = GetCounterByName(ItemName);
     return Counter && Counter->Count>=Count;
+}
+
+bool UAC_Inventory::Contains(const TMap<FName, int32>& items) const
+{
+    for (const auto& Pair: items)
+        if (!Contains(Pair.Key, Pair.Value))
+            return false;
+    return true;
 }
 
 int32 UAC_Inventory::GetCountOfItem(FName ItemName) const
