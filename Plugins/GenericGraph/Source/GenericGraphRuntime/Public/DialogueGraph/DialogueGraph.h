@@ -33,7 +33,6 @@ public:
      */
     UFUNCTION(BlueprintCallable)
     void UpdateValidationTags(const FGameplayTagContainer& GamePlayTags);
-    
     /**
      * Return start NPC Dialogue Node based on provided Tags
      * If Gameplay tags were not provided

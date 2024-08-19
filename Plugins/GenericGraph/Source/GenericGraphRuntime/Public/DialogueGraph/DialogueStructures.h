@@ -23,6 +23,9 @@ struct FDialogueConditionData
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Conditions")
     FGameplayTagContainer ConditionTags;
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Items")
+    TMap<FName, int32> Items;
 };
 
 USTRUCT(BlueprintType)
