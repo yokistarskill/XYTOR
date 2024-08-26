@@ -79,3 +79,6 @@ dist/*
 target/
 *.class
 *.log
+
+# Files for local tests
+./Content/XYTOR/Maps/ForTests/Map_Dev.umap

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AC_InteractionHandler.h"
+#include "GameplayTagContainer.h"
 #include "W_EvidenceBase.h"
 #include "Components/TextRenderComponent.h"
 #include "Components/WidgetComponent.h"
@@ -20,6 +21,8 @@ class XYTOR_API UAC_ExploringHandler : public UAC_InteractionHandler
     inline static TSubclassOf<UW_EvidenceBase> WidgetClass = {};
     inline static UMaterialInterface* Material = nullptr;
 protected:
+    UPROPERTY(EditAnywhere)
+    FGameplayTagContainer TagsToDiscover;
     UPROPERTY(EditAnywhere)
     FText LongInfo;
     UPROPERTY(EditAnywhere)
