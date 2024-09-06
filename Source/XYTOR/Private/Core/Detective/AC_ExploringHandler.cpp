@@ -2,7 +2,10 @@
 
 
 #include "Core/Detective/AC_ExploringHandler.h"
+
+#include "PS_Tokens.h"
 #include "Components/WidgetComponent.h"
+#include "Core/Detective/PC_Detective.h"
 
 
 void UAC_ExploringHandler::ChangeInteractionComponent() const
@@ -67,7 +70,11 @@ void UAC_ExploringHandler::Interact(AActor* InteractingActor)
    // Super::Interact(InteractingActor);
 
     if (!WidgetComponent)
+    {
         InitWidget();
+        const APC_Detective* DetectiveController = Cast<APC_Detective>(InteractingActor);
+        DetectiveController->GetPlayerState<APS_Tokens>()->UpdateTokens(TagsToDiscover);
+    }
     DisplayLongInformation();
 }
 
@@ -92,14 +99,13 @@ void UAC_ExploringHandler::InitWidget()
     WidgetComponent = NewObject<UWidgetComponent>(Owner, UWidgetComponent::StaticClass(), TEXT("EvidenceWidget"));
     if (WidgetComponent)
     {
-        WidgetComponent->SetRelativeLocation({0,0,50});
         WidgetComponent->AttachToComponent(Owner->GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
         WidgetComponent->RegisterComponent();
         WidgetComponent->SetWidgetClass(WidgetClass);
         WidgetComponent->SetVisibility(false);
 
         WidgetComponent->SetDrawAtDesiredSize(true);
-        WidgetComponent->SetRelativeLocation(FVector(0.0f, 0.0f, 0.0f));
+        WidgetComponent->SetRelativeLocation({0,0,200});
         WidgetComponent->SetRelativeRotation(FRotator(0.0f, 0.0f, 0.0f));
         WidgetComponent->SetWidgetSpace(EWidgetSpace::Screen);
 
