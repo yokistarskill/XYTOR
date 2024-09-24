@@ -23,6 +23,12 @@ public:
     UPROPERTY(EditDefaultsOnly, Category = "DialogueGraph")
     FLinearColor PlayerDialogueNodeColor;
 
+    UPROPERTY(EditDefaultsOnly, Category = "DialogueGraph")
+    FLinearColor PlayerDialogueNodeWithConditionColor;
+
+    UPROPERTY(EditDefaultsOnly, Category = "DialogueGraph")
+    FLinearColor PlayerDialogueNodeWithResultColor;
+
 private:
     FGameplayTagContainer ValidationTags;
 

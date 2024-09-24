@@ -18,6 +18,11 @@ FLinearColor UPlayerDialogueGraphNode::GetBackgroundColor() const
 {
     if (const UDialogueGraph* DialogueGraph = Cast<UDialogueGraph>(GetGraph()))
     {
+        if (!ResultData.IsClear())
+            return DialogueGraph->PlayerDialogueNodeWithResultColor;
+        if (!ConditionData.IsClear())
+            return DialogueGraph->PlayerDialogueNodeWithConditionColor;
+        
         return DialogueGraph->PlayerDialogueNodeColor;
     }
     

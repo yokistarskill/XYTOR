@@ -26,6 +26,11 @@ struct FDialogueConditionData
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Items")
     TMap<FName, int32> Items;
+    
+    bool IsClear() const
+    {
+        return ConditionTags.IsEmpty() && Items.IsEmpty();
+    }
 };
 
 USTRUCT(BlueprintType)
@@ -41,4 +46,9 @@ struct FDialogueResultData
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Quest")
     FName Quest;
+
+    bool IsClear() const
+    {
+        return ResultTags.IsEmpty() && Items.IsEmpty() && Quest.IsNone();
+    }
 };

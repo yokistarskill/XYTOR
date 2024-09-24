@@ -13,6 +13,8 @@ UDialogueGraph::UDialogueGraph()
     
     NPCDialogueNodeColor = FLinearColor::Red;
     PlayerDialogueNodeColor = FLinearColor::Green;
+    PlayerDialogueNodeWithResultColor = FLinearColor::Blue;
+    PlayerDialogueNodeWithConditionColor = FLinearColor::Yellow;
 
     Name = "DialogueGraph";
 }
