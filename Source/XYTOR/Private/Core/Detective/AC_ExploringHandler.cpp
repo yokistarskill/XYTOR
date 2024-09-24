@@ -73,7 +73,7 @@ void UAC_ExploringHandler::Interact(AActor* InteractingActor)
     {
         InitWidget();
         const APC_Detective* DetectiveController = Cast<APC_Detective>(InteractingActor);
-        DetectiveController->GetPlayerState<APS_Tokens>()->UpdateTokens(TagsToDiscover);
+        DetectiveController->GetPlayerState<APS_Tokens>()->UpdateTokensByStruct(TagsToDiscover);
     }
     DisplayLongInformation();
 }

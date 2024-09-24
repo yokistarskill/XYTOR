@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
+#include "S_TagConfigs.h"
 #include "GameFramework/PlayerState.h"
 #include "PS_Tokens.generated.h"
 
@@ -23,7 +24,9 @@ protected:
 
 public:
     const FGameplayTagContainer& GetTokens() { return Tokens; }
-    
+
+    UFUNCTION(BlueprintCallable)
+    void UpdateTokensByStruct(const FS_TagConfigs& TagConfigs);
     UFUNCTION(BlueprintCallable)
     void UpdateTokens(const FGameplayTagContainer& TagContainer, bool bRemove = false);
 };
