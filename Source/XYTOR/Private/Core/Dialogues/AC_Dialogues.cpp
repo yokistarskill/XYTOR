@@ -69,9 +69,11 @@ void UAC_Dialogues::BeginDialogue(UDialogueGraph* Dialogue)
     DialogueGraph->UpdateValidationTags(Tokens->GetTokens());
     
     CurrentNPCNode = DialogueGraph->GetStartDialogueNode();
-
+    if (!CurrentNPCNode)
+        return;
+    
     CurrentPlayerDialogueNodes = DialogueGraph->GetPlayerDialogueNodes(CurrentNPCNode);
-
+    
     OnBeginDialogueDelegate.Broadcast(CurrentNPCNode, CurrentPlayerDialogueNodes);
     
     GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Green, FString::Printf(TEXT("BeginDialogue.")));

@@ -18,4 +18,5 @@ public:
 
     UFUNCTION(BlueprintCallable)
     virtual void Interact(AActor* InteractingActor);
+    virtual bool CanInteract(AActor* InteractingActor);
 };
